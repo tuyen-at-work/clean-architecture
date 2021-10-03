@@ -11,9 +11,9 @@ namespace CleanArchitecture.WebUI.Controllers
         private ISender _mediator;
 
         protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
-        protected bool IsMobile { get; private set; }
+        protected bool IsMobileDevice { get; private set; }
 
         [NonAction]
-        public void SetMobileMode() => IsMobile = true;
+        public void SetMobileMode() => IsMobileDevice = true;
     }
 }
