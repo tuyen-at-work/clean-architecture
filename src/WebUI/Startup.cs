@@ -1,3 +1,4 @@
+﻿using System.Linq;
 using CleanArchitecture.Application;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Infrastructure;
@@ -8,13 +9,11 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using System.Linq;
 
 namespace CleanArchitecture.WebUI
 {
@@ -43,8 +42,12 @@ namespace CleanArchitecture.WebUI
                 .AddDbContextCheck<ApplicationDbContext>();
 
             services.AddControllersWithViews(options =>
-                options.Filters.Add<ApiExceptionFilterAttribute>())
-                    .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
+                {
+                    options.Filters.Add<ApiExceptionFilterAttribute>();
+                    options.Filters.Add<DeviceDetectionFilterAttribute>();
+
+                })
+                .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
             services.AddRazorPages();
 
