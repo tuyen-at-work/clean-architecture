@@ -45,18 +45,27 @@ In order to get Docker working, you will need to add a temporary SSL cert and mo
 You can find [Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-3.1) that describe the steps required for Windows, macOS, and Linux.
 
 For Windows:
-The following will need to be executed from your terminal to create a cert
-`dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p Your_password123`
-`dotnet dev-certs https --trust`
+The following will need to be executed from your terminal to create a cert:
 
-NOTE: When using PowerShell, replace %USERPROFILE% with $env:USERPROFILE.
+```shell
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p Your_password123
+dotnet dev-certs https --trust
+```
+
+> NOTE: When using PowerShell, replace %USERPROFILE% with $env:USERPROFILE.
 
 FOR macOS:
-`dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Your_password123`
-`dotnet dev-certs https --trust`
+
+```shell
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Your_password123
+dotnet dev-certs https --trust
+```
 
 FOR Linux:
-`dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Your_password123`
+
+```shell
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p Your_password123
+```
 
 In order to build and run the docker containers, execute `docker-compose -f 'docker-compose.yml' up --build` from the root of the solution where you find the docker-compose.yml file.  You can also use "Docker Compose" from Visual Studio for Debugging purposes.
 Then open http://localhost:5000 on your browser.
@@ -87,7 +96,9 @@ To use `dotnet-ef` for your migrations please add the following flags to your co
 
 For example, to add a new migration from the root folder:
 
- `dotnet ef migrations add "SampleMigration" --project src\Infrastructure --startup-project src\WebUI --output-dir Persistence\Migrations`
+```shell
+dotnet ef migrations add "SampleMigration" --project src\Infrastructure --startup-project src\WebUI --output-dir Persistence\Migrations
+```
 
 ## Overview
 
